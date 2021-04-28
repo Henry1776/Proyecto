@@ -1,13 +1,24 @@
 <p id="notice"><%= notice %></p>
 
+
+  <% if @picture.photo.attached? %>
+  <%= image_tag @picture.photo.variant(resize: '200x200').processed %>
+  <% end %>
+
+<p>
+  <strong>Content:</strong>
+  <%= @picture.content %>
+</p>
+
+
 <p>
   <strong>User:</strong>
   <%= @picture.user_id %>
 </p>
 
 <p>
-  <strong>Place:</strong>
-  <%= @picture.place_id %>
+  <strong>Address:</strong>
+  <%= @picture.address %>
 </p>
 
 <%= link_to 'Edit', edit_picture_path(@picture) %> |

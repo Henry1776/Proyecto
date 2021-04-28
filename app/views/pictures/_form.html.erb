@@ -11,17 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
 
   <div class="field">
-    <%= form.label :place_id %>
-    <%= form.text_field :place_id %>
+  <%= form.label :photo %>
+  <%= form.file_field :photo %>
   </div>
+
+
+  <div class="field">
+  <%= form.label :address %>
+  <%= form.text_field :address, id: "address" %>
+  <a href="" id="position">Mi Ubicación</a>
+  </div>
+  
+
+ <div class="field">
+  <%= form.label :content %>
+  <%= form.text_area :content %>
+  </div>
+
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
+
 <% end %>
