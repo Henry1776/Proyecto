@@ -13,6 +13,15 @@ class PicturesController < ApplicationController
   # GET /pictures/new
   def new
     @picture = Picture.new
+    if params[:latitude] && params[:longitude]
+      address = Geocoder.address([params[:latitude], params[:longitude]])     
+    else
+      address = nil      
+    end
+    respond_to do |format|
+      format.html{}
+      format.json{render json: {address: address}}      
+    end
   end
 
   # GET /pictures/1/edit
@@ -21,7 +30,9 @@ class PicturesController < ApplicationController
 
   # POST /pictures or /pictures.json
   def create
-    @picture = Picture.new(picture_params)
+    @coord = Geocoder.coordinates(params[:address])
+    @picture = Picture.new(picture_params.merge(user_id: current_user.id))
+
 
     respond_to do |format|
       if @picture.save
@@ -64,6 +75,6 @@ class PicturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def picture_params
-      params.require(:picture).permit(:user_id, :place_id)
+      params.require(:picture).permit(:photo, :content, :address)
     end
 end

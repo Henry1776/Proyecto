@@ -1,5 +1,8 @@
 class Picture < ApplicationRecord
+  attr_accessor :address
   belongs_to :user
-  belongs_to :place
   has_one_attached :photo
+  geocoded_by :address
+  after_validation :geocode
+
 end
